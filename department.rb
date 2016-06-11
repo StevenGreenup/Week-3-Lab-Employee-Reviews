@@ -14,30 +14,32 @@ class Department
   end
 
   def total_salary
-
    @total_salary = @employees.map do |employee|
      employee.salary
    end
    @total_salary.reduce(:+)
-
   end
 
-end
+  def department_raise
+     @employees.each do |employee|
+      if employee.grade == ["a+"]
+        employee.salary = employee.salary * 1.1
+      elsif employee.grade == ["a"]
+        employee.salary = employee.salary * 1.08
+      elsif employee.grade == ["b"]
+        employee.salary = employee.salary * 1.05
+      elsif employee.grade == ["c"]
+        employee.salary = employee.salary * 1.03
+      elsif employee.grade == []
+        puts "#{employee.name.upcase} NEEDS TO BE EVALUATED TO RECEIVE RAISE!"
+      else
+        employee.salary = employee.salary
+      end
+    end
+  end
 
-  # advertising = Department.new("Advertising")
-  # advertising.add_employee("Dude")
-  # advertising.add_employee("Dan")
-  # puts advertising.dept_name
-  # puts advertising.employee_list
-  #
-  #
-  # finance = Department.new("Finance")
-  # finance.add_employee("Carly")
-  # finance.add_employee("Ed")
-  # puts finance.dept_name
-  # puts finance.employee_list
-  #
-  # engineering = Department.new("Engineering")
-  # engineering.add_employee("blah blah")
-  # puts engineering.dept_name
-  # puts engineering.employee_list
+
+
+
+
+end
