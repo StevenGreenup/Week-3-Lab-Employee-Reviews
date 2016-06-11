@@ -1,4 +1,3 @@
-
 class Employee
   attr_accessor :name, :email, :phone, :salary, :grade
 
@@ -36,12 +35,4 @@ class Employee
 
   end
 
-
-
-
-
 end
-
-# employee = Employee.new("Steven", "g@gmail.com", "2342", "14")
-# employee = Employee.new("tim", "g@gmail.com", "2342", "14")
-# employee = Employee.new("Steven", "g@gmail.com", "2342", "14")

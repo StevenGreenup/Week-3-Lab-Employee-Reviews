@@ -104,6 +104,7 @@ class CompanyTest < Minitest::Test
     employee1.working("a+")
 
     advertising.department_raise
+    #if department gets a riase I want to flag that an employee hasn't been evaluated. If deserves a raise then gets raise
 
     assert_equal 66000, employee1.salary #a+ 1.1
     assert_equal 60000, employee2.salary

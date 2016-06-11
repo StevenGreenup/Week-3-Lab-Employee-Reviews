@@ -31,15 +31,11 @@ class Department
       elsif employee.grade == ["c"]
         employee.salary = employee.salary * 1.03
       elsif employee.grade == []
-        puts "#{employee.name.upcase} NEEDS TO BE EVALUATED TO RECEIVE RAISE!"
+        return "#{employee.name.upcase} NEEDS TO BE EVALUATED TO RECEIVE RAISE!"
       else
         employee.salary = employee.salary
       end
     end
   end
-
-
-
-
 
 end
