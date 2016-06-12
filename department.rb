@@ -9,6 +9,7 @@ class Department
     @total_salary = []
   end
 
+
   def add_employee(employee)
     @employees << (employee)
   end
@@ -22,14 +23,12 @@ class Department
 
   def department_raise
      @employees.each do |employee|
-      if employee.grade == ["a+"]
-        employee.salary = employee.salary * 1.1
-      elsif employee.grade == ["a"]
-        employee.salary = employee.salary * 1.08
+      if employee.grade == ["a"]
+        employee.salary = (employee.salary * 1.08).round(2)
       elsif employee.grade == ["b"]
-        employee.salary = employee.salary * 1.05
+        employee.salary = (employee.salary * 1.05).round(2)
       elsif employee.grade == ["c"]
-        employee.salary = employee.salary * 1.03
+        employee.salary = (employee.salary * 1.03).round(2)
       elsif employee.grade == []
         return "#{employee.name.upcase} NEEDS TO BE EVALUATED TO RECEIVE RAISE!"
       else

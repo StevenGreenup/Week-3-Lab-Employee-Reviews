@@ -1,5 +1,5 @@
 class Employee
-  attr_accessor :name, :email, :phone, :salary, :grade
+  attr_accessor :name, :email, :phone, :salary, :grade, :review
 
   def initialize(name, email, phone, salary)
     @name = name
@@ -7,10 +7,12 @@ class Employee
     @phone = phone
     @salary = salary
     @grade = []
+    @review = []
   end
 
   def give_review(review)
-     review
+     @review << review
+     return review
   end
 
   def give_raise(input)
@@ -18,17 +20,16 @@ class Employee
   end
 
   def working(grade)
+    @grade.clear
       @grade << grade
-    if grade == "a+"
-      return "#{@name} is performing well above expectations"
-    elsif grade == "a"
-      return "#{@name} is performing above expectations"
+    if grade == "a"
+      return "#{@name} is performing well above expectations."
     elsif grade == "b"
-      return "#{@name} is meeting expectations"
+      return "#{@name} is meeting expectations, and is known to sometimes go the extra mile."
     elsif grade == "c"
-      return "#{@name} needs improvement"
+      return "#{@name} is meeting expectations."
     elsif grade == "d"
-      return "#{@name} needs to be given a warning about improvement, and if not corrected, FIRED!"
+      return "#{@name} needs to be given a warning about needing to improve, and if not corrected, FIRED!"
     elsif grade == "f"
       return "#{@name} needs to be eliminated."
     end
