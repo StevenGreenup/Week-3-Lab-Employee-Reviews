@@ -16,7 +16,7 @@ class Employee
   end
 
   def give_raise(input)
-    @salary = @salary + input
+  @salary = (@salary + input).round(2)
   end
 
   def working(grade)

@@ -27,17 +27,17 @@ class CompanyTest < Minitest::Test
 
    def test_get_department_salary
      advertising = Department.new("Advertising")
-     employee1 = Employee.new("Steven", "g@gmail.com", "555-555-5555", 60000)
-     employee2 = Employee.new("Tom", "t@gmail.com", "555-555-5555", 80000)
-     employee3 = Employee.new("Steven", "g@gmail.com", "555-555-5555", 60000)
-     employee4 = Employee.new("Tom", "t@gmail.com", "555-555-5555", 80000)
+     employee1 = Employee.new("Steven", "g@gmail.com", "555-555-5555", 60000.0)
+     employee2 = Employee.new("Tom", "t@gmail.com", "555-555-5555", 80000.0)
+     employee3 = Employee.new("Steven", "g@gmail.com", "555-555-5555", 60000.0)
+     employee4 = Employee.new("Tom", "t@gmail.com", "555-555-5555", 80000.0)
 
      advertising.add_employee(employee1)
      advertising.add_employee(employee2)
      advertising.add_employee(employee3)
      advertising.add_employee(employee4)
      advertising.total_salary
-     assert_equal 280000, advertising.total_salary
+     assert_equal 280000.0, advertising.total_salary
    end
 
   def test_employee_can_be_reviewed
@@ -49,29 +49,29 @@ class CompanyTest < Minitest::Test
   end
 
   def test_employees_can_get_individual_raises
-    employee1 = Employee.new("Steven", "g@gmail.com", "555-555-5555", 60000)
+    employee1 = Employee.new("Steven", "g@gmail.com", "555-555-5555", 60000.0)
     employee1.give_raise(5000)
-    assert_equal 65000, employee1.salary
+    assert_equal 65000.0, employee1.salary
   end
 
   def test_if_employee_is_doing_work
-    employee = Employee.new("Steven", "g@gmail.com", "555-555-5555", 60000)
+    employee = Employee.new("Steven", "g@gmail.com", "555-555-5555", 60000.0)
       employee.working("a")
       assert_equal ("#{employee.name} is performing well above expectations."), employee.working("a")
   end
 
   def test_if_employee_has_been_graded
-    employee = Employee.new("Steven", "g@gmail.com", "555-555-5555", 60000)
+    employee = Employee.new("Steven", "g@gmail.com", "555-555-5555", 60000.0)
       employee.working("a")
       assert_equal ["a"], employee.grade
   end
 
   def test_to_give_department_a_raise
     advertising = Department.new("Advertising")
-    employee2 = Employee.new("Tom", "t@gmail.com", "555-555-5555", 80000)
-    employee3 = Employee.new("Tom", "t@gmail.com", "555-555-5555", 80000)
-    employee4 = Employee.new("Tom", "t@gmail.com", "555-555-5555", 80000)
-    employee5 = Employee.new("Tom", "t@gmail.com", "555-555-5555", 80000)
+    employee2 = Employee.new("Tom", "t@gmail.com", "555-555-5555", 80000.0)
+    employee3 = Employee.new("Tom", "t@gmail.com", "555-555-5555", 80000.0)
+    employee4 = Employee.new("Tom", "t@gmail.com", "555-555-5555", 80000.0)
+    employee5 = Employee.new("Tom", "t@gmail.com", "555-555-5555", 80000.0)
     advertising.add_employee(employee2)
     advertising.add_employee(employee3)
     advertising.add_employee(employee4)
@@ -81,43 +81,72 @@ class CompanyTest < Minitest::Test
     employee4.working("c")
     employee5.working("f")
 
-    advertising.department_raise
+    advertising.department_raise(1000)
 
-    assert_equal 86400, employee2.salary #a 1.08
-    assert_equal 84000, employee3.salary #b 1.05
-    assert_equal 82400, employee4.salary #c 1.03
-    assert_equal 80000, employee5.salary #f 1
+    assert_equal 81100.0, employee2.salary #a raise * 1.10
+    assert_equal 81080.0, employee3.salary #b raise * 1.08
+    assert_equal 81000.0, employee4.salary #c raise * 1.00
+    assert_equal 80000.0, employee5.salary #f no raise
 
 
   end
 
   def test_what_happens_if_employee_not_graded_and_dept_gets_raise
     advertising = Department.new("Advertising")
-    employee1 = Employee.new("Steven", "g@gmail.com", "555-555-5555", 60000)
-    employee2 = Employee.new("Tom", "t@gmail.com", "555-555-5555", 60000)
+    employee1 = Employee.new("Steven", "g@gmail.com", "555-555-5555", 60000.0)
+    employee2 = Employee.new("Tom", "t@gmail.com", "555-555-5555", 60000.0)
     advertising.add_employee(employee1)
     advertising.add_employee(employee2)
     employee1.working("a")
 
-    advertising.department_raise
+    advertising.department_raise(1000)
     #if department gets a riase I want to flag that an employee hasn't been evaluated. If deserves a raise then gets raise
 
-    assert_equal 64800, employee1.salary #a 1.08
-    assert_equal 60000, employee2.salary
+    assert_equal 61100.0, employee1.salary #a 1.08
+    assert_equal 60000.0, employee2.salary
   end
 
   def test_to_mitigate_employee_having_multiple_grades
     advertising = Department.new("Advertising")
-    employee1 = Employee.new("Steven", "g@gmail.com", "555-555-5555", 60000)
+    employee1 = Employee.new("Steven", "g@gmail.com", "555-555-5555", 60000.0)
     advertising.add_employee(employee1)
     employee1.working("a")
     employee1.working("b")
     employee1.working("a")
 
-    advertising.department_raise
+    advertising.department_raise(1000)
     #if department gets a riase I want to flag that an employee hasn't been evaluated. If deserves a raise then gets raise
-puts employee1.grade.inspect
-    assert_equal 64800, employee1.salary #b 1.05
+    assert_equal 61100.0, employee1.salary #b 1.05
+  end
+
+  def test_visual_inpsect
+    advertising = Department.new("Advertising")
+    employee1 = Employee.new("Steven", "g@gmail.com", "555-555-5555", 60000.0)
+    employee2 = Employee.new("Jill", "t@gmail.com", "555-555-5555", 80000.0)
+    employee3 = Employee.new("Bill", "g@gmail.com", "555-555-5555", 60000.0)
+    employee4 = Employee.new("Tom", "t@gmail.com", "555-555-5555", 80000.0)
+
+    advertising.add_employee(employee1)
+    advertising.add_employee(employee2)
+    advertising.add_employee(employee3)
+    advertising.add_employee(employee4)
+    employee1.working("a")
+    employee2.working("b")
+    employee3.working("a")
+    employee4.working("f")
+    puts employee1.salary
+    employee1.give_raise(5305)
+    puts employee1.salary
+    employee4.give_review("Lazy person, and needs to be eliminated")
+    employee4.give_review("Has performed after being called out")
+    puts employee4.salary
+    employee4.working("b")
+    advertising.department_raise(1000)
+    puts employee4.salary
+    puts employee1.salary
+    puts advertising.total_salary
+    pp advertising.employees
+
   end
 
 
