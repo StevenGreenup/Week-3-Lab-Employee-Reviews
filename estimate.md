@@ -24,5 +24,5 @@ Actual
 1 Get a total salary for all employees in a department.
 1 Add some employee review text (a paragraph or two) to an employee.
 1.5 Mark whether an employee is performing satisfactorily or not satisfactorily.
-3 Give a raise to an individual. You decide if this makes sense in dollars or in percent.
-3 Give raises to a department's employees. You must pass this method a total dollar amount, and it must distribute the raise amounts reasonably to the          department's employees. Only employees who are performing satisfactorily should get raises.
+1< Give a raise to an individual. You decide if this makes sense in dollars or in percent.
+1.5 Give raises to a department's employees. You must pass this method a total dollar amount, and it must distribute the raise amounts reasonably to the          department's employees. Only employees who are performing satisfactorily should get raises.
